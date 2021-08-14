@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A program that plays a user-set number of games of rock, paper, scissors
+ * with the user.
  */
 package sourcepackage.week1.Assessments;
 
@@ -10,24 +9,27 @@ import java.util.Random;
 
 /**
  *
- * @author SeanM
+ * @author Sean McNally
  */
 public class RockPaperScissors {
     public static void main(String args[]){
-        int rounds = 0;
-        int user = 0;
-        int cpu;
-        String replay = "";
-        String cpuString = "";
-        boolean playing = true;
+        int rounds = 0;          //Number of rounds remaining
+        int user = 0;            //User choice
+        int cpu;                 //Computer choice
+        String cpuString = "";   //Computer choice as a string
+        String replay = "";      //Response when asked for a replay
+        boolean playing = true;  //Is the user still playing
         
-        Scanner scanner = new Scanner(System.in);
-        Random rng = new Random();
+        Scanner scanner = new Scanner(System.in); //Scanner for user input
+        Random rng = new Random();                //Random number generator
         
+        //Start game
         System.out.println("Let's play Rock, Paper, Scissors!");
         
         while(playing){
             
+            //Prompts user for number of rounds and checks for valid input.
+            //If input is not valid, informs user and prompts again.
             boolean roundsResponse = false;
             while(!roundsResponse){
                 System.out.println("\nHow many rounds would you like to play? (1-10 rounds)");
@@ -44,8 +46,11 @@ public class RockPaperScissors {
                 }
             }
             
+            //Gameplay
             while(rounds != 0){
                 
+                //Prompts user for choice and checks for valid input.
+                //If input is not valid, informs user and prompts again.
                 boolean choiceResponse = false;
                 while(!choiceResponse){
                     System.out.println("\nChoose rock, paper, or scissors.\n"
@@ -65,9 +70,10 @@ public class RockPaperScissors {
                     }
                 }
                 
-                
+                //Generates computer choice.
                 cpu = rng.nextInt(3) + 1;
                 
+                //Sets string based on computer choice.
                 switch(cpu){
                     case 1:
                         cpuString = "rock";
@@ -80,8 +86,10 @@ public class RockPaperScissors {
                         break;
                 }
                 
+                //States computer choice.
                 System.out.println("\nComputer chose " + cpuString + ".");
 
+                //States game status.
                 switch((user-cpu+3)%3){
                     case 0:
                         System.out.println("It's a tie.");
@@ -97,6 +105,8 @@ public class RockPaperScissors {
                 rounds--;
             }
             
+            //Prompts user for a replay and checks for valid input.
+            //If input is not valid, informs user and prompts again.
             boolean replayResponse = false;
             while(!replayResponse){
                 System.out.println("\nPlay again? (Y/N)");
@@ -110,11 +120,13 @@ public class RockPaperScissors {
                 }
             }
             
+            //Ends game if user denies replay.
             if(replay.equals("n")){
                 playing = false;
             }
         }
         
+        //Thanks user for playing
         System.out.println("\nThanks for playing!");
     }
 }
